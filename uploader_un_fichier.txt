@@ -1,0 +1,53 @@
+Pour uploader un fichier, on a besoin de plusieurs choses :
+    - Un formulaire avec la methode POST et un atribut enctype="multipart/form-data"
+
+        <form method="POST" enctype="multipart/form-data" action="...">
+
+        Le formulaire peut avoir un input de type hidden limitant la taille du fichier uploadé dans le navigateur
+        client (donc, ce n'est qu'une aide et non une fonction de sécurité).
+        Cet input doit être avant l'input où on transmet le fichier.
+        <input type="hidden" name="MAX_FILE_SIZE" value="30000"/>
+
+        Le formulaire doit avoir un input de type file.
+        <input type="file" name="fichierUpload">
+
+    - Une fonction d'upload de fichier (contenue dans upload_file.php)
+
+    - Un dossier dans lequel ranger nos fichiers (ici /img)
+
+Les fichiers envoyés dans la requête HTTP ne se trouvent pas dans la superglobale $_POST, mais dans 
+$_FILES, une autre superglobale, contenant les fichiers uploadés et des informations sur eux.
+
+On accède à $_FILES['nom'] avec l'attribut name de l'input ayant servit à uploader le fichier.
+
+On peut ensuite accèder à plusieurs propriétés, pour chaque fichier uploadé :
+
+$_FILES['nom']['name'] : le nom original du fichier
+$_FILES['nom']['type'] : le type du fichier (jpg, pdf, txt...)
+$_FILES['nom']['size'] : la taille en bytes (1 bytes = 1 octet)
+$_FILES['nom']['tmp_name'] : le nom temporaire sous lequel le fichier est stocké sur le serveur
+                             (contenant aussi les dossiers)
+$_FILES['nom']['error'] : le code d'erreur associé à l'upload du fichier
+
+
+Comment intégrer l'upload de notre fichier dans le traitement d'un formulaire ?
+
+Une fois qu'on a récupéré nos informations :
+
+    Avant la requête en base_de_données :
+
+        Essayer d'uploader le fichier
+        Si notre fonction nous renvoie true :
+            Le fichier a bien été uploadé, on peut continuer le traitement et faire nos requêtes en base
+            de données
+        Si notre fonction nous renvoie false :
+            Le fichier n'a pas pû être uploadé
+            Vous pouvez gérer ceci à votre convenance
+
+
+Modification :
+    Comment modifier une photo ?
+        On supprime l'ancienne
+            avec la fonction unlink()
+        On upload une nouvelle
+        On modifie les infos dans la base de données

@@ -1,0 +1,9 @@
+- fopen() : ouvre un fichier ou en crée un et l'ouvre si il n'existe pas
+
+- fwrite()/fputs() : écrit du contenu dans un fichier
+
+- fclose() : ferme un fichier
+
+- file_get_contents() : lit un fichier et renvoie son contenu comme une chaîne de caractère
+
+- file_put_contents() : revient à appeler les fonctions fopen(), fwrite() et fclose() successivement

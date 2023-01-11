@@ -1,0 +1,10 @@
+- Bien revoir son code, voir si il y a des choses à améliorer, voir si on s'est bien servi de chaque 
+  fonction créée (exemple : messageValidation()) ou si on a pas oublié une partie d'un exercice
+
+- Créer des variantes de tailles et couleurs aux produits, et faire les changements conséquents au panier
+  et à la base de données
+
+- Permettre aux clients de créer une whishlist
+
+- Afficher dynamiquement le nombre d'articles dans le panier dans le header (si il y a au moins un article
+  dans le panier)
